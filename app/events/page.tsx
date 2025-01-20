@@ -91,7 +91,7 @@ export default function EventsPage() {
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Ticket className="h-4 w-4 mr-2" />
-                    ${event.price}
+                    $price TODO
                   </div>
                 </div>
                 <Link href={`/event-details/${event.id}`}>
