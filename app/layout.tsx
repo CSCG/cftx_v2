@@ -5,6 +5,7 @@ import './globals.css';
     import { Toaster } from '@/components/ui/sonner';
     import { ThemeProvider } from '@/components/theme-provider';
     import Link from 'next/link';
+    import { SpeedInsights } from "@vercel/speed-insights/next"
 
     const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ import './globals.css';
     }) {
       return (
         <html lang="en" className="dark">
+          <SpeedInsights/>
           <body className={inter.className}>
             <ThemeProvider
               attribute="class"
