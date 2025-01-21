@@ -77,7 +77,7 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">
+      <h1 className="text-3xl font-bold text-white-900 mb-4">
         {event.event_name}
       </h1>
       <div className="bg-white rounded-lg shadow-md p-6">
@@ -89,13 +89,7 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
           className="w-full h-64 object-cover rounded-t-lg"
         />
         <div className="mt-4">
-          <div
-            className="text-gray-700"
-            dangerouslySetInnerHTML={{
-              __html: sanitizeHTML(event.event_description),
-            }}
-          />
-          <div className="mt-4">
+          <div className="text-gray-700">
             <p className="text-gray-600">
               <span className="font-semibold">Date:</span>{' '}
               {format(new Date(event.event_date), 'PPP')}
@@ -109,35 +103,41 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
             </p>
           </div>
         </div>
-      </div>
-      {ticketTiers.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            Ticket Tiers
-          </h2>
-          <div className="space-y-4">
-            {ticketTiers.map((tier) => (
-              <div
-                key={tier.id}
-                className="border rounded-md p-4 flex flex-col gap-2"
-              >
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {tier.tier_name}
-                </h3>
-                <p className="text-gray-600">{tier.tier_name}</p>
-                <p className="text-gray-700 font-medium">
-                  Price: ${tier.tier_price}
-                </p>
-                <Button asChild>
-                  <a href={`https://www.cedarfallsdata.com/event/${event.id}/${tier.id}/purchase`}>
-                    Purchase Ticket
-                  </a>
-                </Button>
-              </div>
-            ))}
+        {ticketTiers.length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Ticket Tiers
+            </h2>
+            <div className="space-y-4">
+              {ticketTiers.map((tier) => (
+                <div
+                  key={tier.id}
+                  className="border rounded-md p-4 flex flex-col gap-2"
+                >
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {tier.tier_name}
+                  </h3>
+                  <p className="text-gray-600">{tier.tier_name}</p>
+                  <p className="text-gray-700 font-medium">
+                    Price: ${tier.tier_price}
+                  </p>
+                  <Button asChild>
+                    <a href={`https://www.cedarfallsdata.com/event/${event.id}/${tier.id}/purchase`}>
+                      Purchase Ticket
+                    </a>
+                  </Button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        <div
+          className="mt-4 text-gray-700"
+          dangerouslySetInnerHTML={{
+            __html: sanitizeHTML(event.event_description),
+          }}
+        />
+      </div>
     </div>
   );
 };
