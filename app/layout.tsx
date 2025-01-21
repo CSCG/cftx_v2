@@ -21,7 +21,6 @@ import './globals.css';
     }) {
       return (
         <html lang="en" className="dark">
-          <SpeedInsights/>
           <body className={inter.className}>
             <ThemeProvider
               attribute="class"
@@ -62,6 +61,7 @@ import './globals.css';
               </div>
               <Toaster />
             </ThemeProvider>
+            <SpeedInsights/>
           </body>
         </html>
       );
