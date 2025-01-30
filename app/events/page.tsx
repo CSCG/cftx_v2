@@ -17,7 +17,7 @@ export default function EventsPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await api.get('/cftx-events');
+        const response = await api.get('/events/');
         setEvents(response.data);
       } catch (err) {
         setError('Failed to fetch events');

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://n8n.og1.xyz/webhook';
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://qy5i7jhbb8.execute-api.us-east-2.amazonaws.com/prod-cached';
 
     export const api = axios.create({
       baseURL,
