@@ -118,10 +118,10 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
         </div>
         {ticketTiers.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-2xl font-semibold text-gray-400 mb-4">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               Ticket Tiers
             </h2>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {ticketTiers.map((tier) => (
                 <div
                   key={tier.id}
@@ -134,7 +134,11 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
                   <p className="text-gray-700 font-medium">
                     Price: ${tier.tier_price}
                   </p>
-                  <Button asChild>
+                  <Button 
+                    asChild 
+                    variant="default" // Use default blue variant
+                    className="mt-2"
+                  >
                     <a href={`https://www.cedarfallsdata.com/event/${event.id}/${tier.id}/purchase`}>
                       Purchase Ticket
                     </a>
@@ -162,8 +166,8 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
                     'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80'
                   }
                   alt={`${event.event_name} Flyer`}
-                  width={800}
-                  height={1200}
+                  width={400}
+                  height={600}
                   className="max-w-2xl rounded-lg shadow-md transition-transform group-hover:opacity-95"
                 />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -174,7 +178,7 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[90vw] max-h-[90vh] overflow-hidden">
+            <DialogContent className="max-w-[50vw] max-h-[50vh] overflow-hidden">
               <div className="relative w-full h-full flex items-center justify-center">
                 <Image
                   src={
