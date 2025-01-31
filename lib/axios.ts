@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://qy5i7jhbb8.execute-api.us-east-2.amazonaws.com/prod-cached';
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || 'https://api.cftx.net/prod-cached';
 
     export const api = axios.create({
       baseURL,

@@ -15,7 +15,9 @@ interface EventDetailsPageProps {
 async function getEvent(id: string): Promise<Event | null> {
   try {
     console.log('Fetching event with id:', id);
-    const response = await api.post('/event-detail', { id });
+    const response = await api.post('/event-detail', {
+      body: JSON.stringify({ id }),
+    });
     console.log('Event response:', response);
     if (response.data && response.data[0].id) {
       return response.data[0];
@@ -32,7 +34,9 @@ async function getEvent(id: string): Promise<Event | null> {
 async function getTicketTiers(id: string): Promise<TicketTier[]> {
   try {
     console.log('Fetching ticket tiers with id:', id);
-    const response = await api.post('/ticket-tiers', { id });
+    const response = await api.post('/ticket-tiers', {
+      body: JSON.stringify({ id }),
+    });
     console.log('Ticket tiers response:', response);
     return response.data;
   } catch (error) {
