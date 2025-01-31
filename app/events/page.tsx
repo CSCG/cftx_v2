@@ -45,7 +45,7 @@ export default function EventsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Events</h1>
+      <h1 className="text-3xl font-bold text-gray-400 mb-8">Upcoming Events</h1>
 
       {isLoading ? (
         <LoadingSkeleton />
@@ -77,7 +77,7 @@ export default function EventsPage() {
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                <h2 className="text-xl font-semibold text-gray-400 mb-2">
                   {event.event_name}
                 </h2>
                 <div className="space-y-2 mb-4">

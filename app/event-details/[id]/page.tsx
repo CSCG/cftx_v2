@@ -116,7 +116,7 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
         </div>
         {ticketTiers.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-2xl font-semibold text-gray-400 mb-4">
               Ticket Tiers
             </h2>
             <div className="space-y-4">
