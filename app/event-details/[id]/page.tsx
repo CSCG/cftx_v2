@@ -5,6 +5,8 @@ import Image from 'next/image';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { TicketTier } from '@/types/ticket-tier';
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { ZoomIn } from "lucide-react"; // For zoom icon
 
 interface EventDetailsPageProps {
   params: {
@@ -148,6 +150,47 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
             __html: sanitizeHTML(event.event_description),
           }}
         />
+        <div className="mt-8 flex flex-col items-center">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Event Flyer</h2>
+          
+          <Dialog>
+            <DialogTrigger asChild>
+              <div className="relative group cursor-zoom-in">
+                <Image
+                  src={
+                    event.banner_image_url ||
+                    'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80'
+                  }
+                  alt={`${event.event_name} Flyer`}
+                  width={800}
+                  height={1200}
+                  className="max-w-2xl rounded-lg shadow-md transition-transform group-hover:opacity-95"
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-black/50 p-3 rounded-full">
+                    <ZoomIn className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+              </div>
+            </DialogTrigger>
+            
+            <DialogContent className="max-w-[90vw] max-h-[90vh] overflow-hidden">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image
+                  src={
+                    event.banner_image_url ||
+                    'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80'
+                  }
+                  alt={`${event.event_name} Flyer`}
+                  width={1600}
+                  height={2400}
+                  className="max-w-full max-h-[80vh] object-contain"
+                  priority
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </div>
   );
