@@ -19,8 +19,9 @@ async function getEvent(id: string): Promise<Event | null> {
       body: JSON.stringify({ id }),
     });
     console.log('Event response:', response);
-    if (response.data && response.data[0].id) {
-      return response.data[0];
+    const parsed = JSON.parse(response.data.body);
+    if (parsed && parsed[0]?.id) {
+      return parsed[0];
     } else {
       console.error('Invalid event data:', response.data);
       return null;
@@ -38,7 +39,13 @@ async function getTicketTiers(id: string): Promise<TicketTier[]> {
       body: JSON.stringify({ id }),
     });
     console.log('Ticket tiers response:', response);
-    return response.data;
+    const parsed = JSON.parse(response.data.body);
+    if (Array.isArray(parsed)) {
+      return parsed;
+    } else {
+      console.error('Invalid tier data:', response.data);
+      return [];
+    }
   } catch (error) {
     console.error('Failed to fetch ticket tiers:', error);
     return [];
