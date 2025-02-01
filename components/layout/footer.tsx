@@ -15,7 +15,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-muted-foreground">
-            a Bodhi Industries Product
+          &copy; {new Date().getFullYear()} by <a href="https://bodhi.industries">Bodhi Industries</a>. All rights reserved. (Build: {process.env.NEXT_PUBLIC_GIT_COMMIT})
           </p>
           <div className="flex items-center space-x-6">
             <Link
