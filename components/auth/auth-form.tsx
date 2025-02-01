@@ -54,7 +54,11 @@ export function AuthForm({ type }: AuthFormProps) {
       if (isLogin) {
         await login(values.email, values.password, userType);
       } else {
-        await register(values.name!, values.email, values.password, userType);
+        if ('name' in values) { // Ensure 'name' exists
+          await register(values.name, values.email, values.password, userType);
+        } else {
+          console.error("Registration error: 'name' is missing");
+        }
       }
     } catch (error) {
       console.error('Authentication error:', error);
