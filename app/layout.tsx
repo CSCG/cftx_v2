@@ -4,9 +4,10 @@ import { Inter } from 'next/font/google';
 import { Navbar } from '@/components/layout/navbar';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/components/theme-provider';
-import Link from 'next/link';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from '@/contexts/auth-context';
+import FreshdeskWidget from "@/components/FreshdeskWidget";
+import Footer from '@/components/layout/footer'; // Import the Footer component
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,39 +34,15 @@ export default function RootLayout({
             <div className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-grow bg-background">{children}</main>
-              <footer className="border-t border-border">
-                <div className="container mx-auto px-4 py-6">
-                  <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <p className="text-sm text-muted-foreground">
-                      a Bodhi Industries Product
-                    </p>
-                    <div className="flex space-x-6">
-                      <Link
-                        href="https://bodhi.industries/privacy-policy"
-                        className="text-sm text-muted-foreground hover:text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Privacy Policy
-                      </Link>
-                      <Link
-                        href="https://bodhi.industries/terms-of-service"
-                        className="text-sm text-muted-foreground hover:text-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Terms of Service
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </footer>
+              <Footer /> {/* Use the new Footer client component */}
             </div>
             <Toaster />
           </ThemeProvider>
         </AuthProvider>
-        <SpeedInsights/>
+        <SpeedInsights />
+        
       </body>
+      
     </html>
   );
 }

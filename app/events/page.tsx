@@ -50,12 +50,12 @@ export default function EventsPage() {
       {isLoading ? (
         <LoadingSkeleton />
       ) : error ? (
-        <div className="text-center py-12">
+        <div className="text-center py-6">
           <h2 className="text-xl text-red-600">{error}</h2>
           <p className="text-gray-500 mt-2">Please try again later</p>
         </div>
       ) : events.length === 0 ? (
-        <div className="text-center py-12">
+        <div className="text-center py-6">
           <h2 className="text-xl text-gray-600">No events found</h2>
           <p className="text-gray-500 mt-2">Check back later for new events</p>
         </div>

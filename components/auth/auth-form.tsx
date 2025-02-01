@@ -34,6 +34,52 @@ interface AuthFormProps {
   type: 'login' | 'register';
 }
 
+const PulsarIcon = () => (
+  <svg 
+    viewBox="0 0 200 200" 
+    className="w-16 h-16 mx-auto mb-3" // Add styling for size and positioning
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="100" cy="100" r="90" className="fill-muted-foreground/10"/>
+    <path d="M40 100 Q100 100 160 100" className="stroke-primary" strokeWidth="3" fill="none" opacity="0.3">
+      <animate 
+        attributeName="d" 
+        dur="2s"
+        repeatCount="indefinite"
+        values="
+          M40 100 Q100 100 160 100;
+          M40 100 Q100 80 160 100;
+          M40 100 Q100 100 160 100;
+          M40 100 Q100 120 160 100;
+          M40 100 Q100 100 160 100"
+      />
+    </path>
+    <path d="M40 100 Q100 100 160 100" className="stroke-primary" strokeWidth="3" fill="none" opacity="0.5">
+      <animate 
+        attributeName="d" 
+        dur="2s"
+        repeatCount="indefinite"
+        begin="0.5s"
+        values="
+          M40 100 Q100 100 160 100;
+          M40 100 Q100 70 160 100;
+          M40 100 Q100 100 160 100;
+          M40 100 Q100 130 160 100;
+          M40 100 Q100 100 160 100"
+      />
+    </path>
+    <circle cx="100" cy="100" r="15" className="fill-primary">
+      <animate
+        attributeName="r"
+        values="15;17;15"
+        dur="2s"
+        repeatCount="indefinite"
+      />
+    </circle>
+    <circle cx="100" cy="100" r="85" className="stroke-primary" strokeWidth="2" fill="none"/>
+  </svg>
+);
+
 export function AuthForm({ type }: AuthFormProps) {
   const [userType, setUserType] = useState<'user' | 'organizer'>('user');
   const isLogin = type === 'login';
@@ -69,8 +115,19 @@ export function AuthForm({ type }: AuthFormProps) {
     <div className="max-w-md w-full space-y-8">
       <div className="text-center">
         <h2 className="mt-6 text-3xl font-bold text-gray-400">
-          {isLogin ? 'Welcome back' : 'Create your account'}
+          {isLogin ? 'Welcome back, astronaut' : 'Create your account'}
         </h2>
+
+        {/* Info Card */}
+        <div className="mt-4 p-4 border border-border rounded-lg bg-muted/50">
+          <PulsarIcon />
+          <p className="text-sm text-muted-foreground">
+            We use a centralized login service for all Bodhi Industries products, named{' '}
+            <span className="font-semibold">Bodhi Pulsar</span>. <br />
+            <br />
+            Please login with your Pulsar account, or register to create one!
+          </p>
+        </div>
         
         {/* Add user type toggle */}
         <div className="mt-4 flex justify-center gap-4">
@@ -82,29 +139,13 @@ export function AuthForm({ type }: AuthFormProps) {
           </Button>
           <Button
             variant={userType === 'organizer' ? 'default' : 'outline'}
-            onClick={() => setUserType('organizer')}
+            onClick={() => window.location.href = 'https://cedarfallsdata.com/login'}
           >
             Organizer
           </Button>
         </div>
         
-        <p className="mt-2 text-sm text-gray-600">
-          {isLogin ? (
-            <>
-              Don't have an account?{' '}
-              <Link href="/auth/register" className="text-primary hover:underline">
-                Sign up
-              </Link>
-            </>
-          ) : (
-            <>
-              Already have an account?{' '}
-              <Link href="/auth/login" className="text-primary hover:underline">
-                Sign in
-              </Link>
-            </>
-          )}
-        </p>
+
       </div>
 
       <Form {...form}>
@@ -175,7 +216,27 @@ export function AuthForm({ type }: AuthFormProps) {
         </form>
       </Form>
 
-      {isLogin && (
+
+
+<p className="mt-2 text-sm text-gray-600 text-center">
+          {isLogin ? (
+            <>
+              Don't have an account? <br />{' '}
+              <Link href="/auth/register" className="text-primary hover:underline">
+                Sign up
+              </Link>
+            </>
+          ) : (
+            <>
+              Already have an account?{' '}
+              <Link href="/auth/login" className="text-primary hover:underline">
+                Sign in
+              </Link>
+            </>
+          )}
+        </p>
+
+        {isLogin && (
         <div className="text-center">
           <Link
             href="/auth/forgot-password"
