@@ -99,3 +99,8 @@ next-env.d.ts
 .next/types/app/events/page.ts
 .next/types/app/layout.ts
 .next/types/app/page.ts
+# .gitignore
+.env
+.env.local
+.env.*.local
+.env.production
