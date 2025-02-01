@@ -1,5 +1,8 @@
 'use client';
 
+// Add this import
+import { toast } from '@/hooks/use-toast';
+
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { Turnstile } from '@marsidev/react-turnstile'
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -82,6 +86,7 @@ const PulsarIcon = () => (
 
 export function AuthForm({ type }: AuthFormProps) {
   const [userType, setUserType] = useState<'user' | 'organizer'>('user');
+  const [captchaToken, setCaptchaToken] = useState<string>();
   const isLogin = type === 'login';
   const schema = isLogin ? loginSchema : registerSchema;
   const { login, register } = useAuth();
@@ -96,18 +101,36 @@ export function AuthForm({ type }: AuthFormProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
+    if (!captchaToken) {
+      toast({
+        title: "Error",
+        description: "Please complete the captcha",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
       if (isLogin) {
-        await login(values.email, values.password, userType);
+        await login(values.email, values.password, userType, captchaToken);
       } else {
         if ('name' in values) { // Ensure 'name' exists
-          await register(values.name, values.email, values.password, userType);
+          await register(values.name, values.email, values.password, userType, captchaToken);
         } else {
-          console.error("Registration error: 'name' is missing");
+          toast({
+            title: "Error",
+            description: "Registration error: 'name' is missing",
+            variant: "destructive"
+          });
         }
       }
     } catch (error) {
       console.error('Authentication error:', error);
+      toast({
+        title: "Error",
+        description: "Authentication failed",
+        variant: "destructive"
+      });
     }
   };
 
@@ -210,7 +233,15 @@ export function AuthForm({ type }: AuthFormProps) {
             />
           )}
 
-          <Button type="submit" className="w-full">
+          {/* Add Turnstile before submit button */}
+          <div className="flex justify-center">
+            <Turnstile
+              siteKey="0x4AAAAAAA7G4w6fOCxGxxrN"
+              onSuccess={(token) => setCaptchaToken(token)}
+            />
+          </div>
+
+          <Button type="submit" className="w-full" disabled={!captchaToken}>
             {isLogin ? 'Sign in' : 'Sign up'}
           </Button>
         </form>

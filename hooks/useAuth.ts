@@ -10,11 +10,11 @@ export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
-  const login = async (email: string, password: string, userType: 'user' | 'organizer') => {
+  const login = async (email: string, password: string, userType: 'user' | 'organizer', captchaToken: string) => {
     try {
       if (userType === 'organizer') {
         // Flask login
-        const response = await api.post('/auth/login', { email, password });
+        const response = await api.post('/auth/login', { email, password, captchaToken });
         setUser({
           ...response.data.user,
           role: 'organizer'
@@ -25,6 +25,9 @@ export function useAuth() {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
+          options: {
+            captchaToken // Add captcha token to auth options
+          }
         });
         
         if (error) {
@@ -66,11 +69,11 @@ export function useAuth() {
     }
   };
 
-  const register = async (name: string, email: string, password: string, userType: 'user' | 'organizer') => {
+  const register = async (name: string, email: string, password: string, userType: 'user' | 'organizer', captchaToken: string) => {
     try {
       if (userType === 'organizer') {
         // Flask registration
-        const response = await api.post('/auth/register', { name, email, password });
+        const response = await api.post('/auth/register', { name, email, password, captchaToken });
         setUser({
           ...response.data.user,
           role: 'organizer'
@@ -81,7 +84,8 @@ export function useAuth() {
           email,
           password,
           options: {
-            data: { name }
+            data: { name },
+            captchaToken // Add captcha token to auth options
           }
         });
         
