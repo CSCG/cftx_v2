@@ -178,19 +178,20 @@ const EventDetailsPage: React.FC<EventDetailsPageProps> = async ({ params }) => 
               </div>
             </DialogTrigger>
             
-            <DialogContent className="max-w-[50vw] max-h-[50vh] overflow-hidden">
-              <div className="relative w-full h-full flex items-center justify-center">
-                <Image
-                  src={
-                    event.banner_image_url ||
-                    'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80'
-                  }
-                  alt={`${event.event_name} Flyer`}
-                  width={1600}
-                  height={2400}
-                  className="max-w-full max-h-[80vh] object-contain"
-                  priority
-                />
+            <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full p-0">
+              <div className="relative w-full h-full flex items-center justify-center bg-black/90">
+              <Image
+                src={
+                event.banner_image_url ||
+                'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80'
+                }
+                alt={`${event.event_name} Flyer`}
+                fill
+                style={{ objectFit: 'contain' }}
+                quality={100}
+                priority
+                className="p-2"
+              />
               </div>
             </DialogContent>
           </Dialog>

@@ -89,10 +89,12 @@ export default function EventsPage() {
                     <MapPin className="h-4 w-4 mr-2" />
                     {event.venue_address}
                   </div>
-                  <div className="flex items-center text-gray-600">
+                    <div className="flex items-center text-gray-600">
                     <Ticket className="h-4 w-4 mr-2" />
-                    $price TODO
-                  </div>
+                    {new Date(event.event_date) > new Date() 
+                      ? "On sale now"
+                      : "Event over"}
+                    </div>
                 </div>
                 <Link href={`/event-details/${event.id}`}>
                   <Button className="w-full">View Details</Button>
